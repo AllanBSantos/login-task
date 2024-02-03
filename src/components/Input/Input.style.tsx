@@ -21,7 +21,12 @@ export const StyledInput = styled.input`
   &[type='password'] {
     font-size: 1rem;
   }
+  &.error {
+    border-color: red;
+    color: red; 
+  }
 `;
+
 
 export const OpenedEyeIcon = styled(FaEye)`
   position: absolute;

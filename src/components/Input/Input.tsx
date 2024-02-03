@@ -2,29 +2,44 @@ import React from 'react';
 import { StyledInput, OpenedEyeIcon, ClosedEyeIcon, Container } from './Input.style';
 
 type InputProps = {
+    value?: string;
     placeholder?: string;
     isPassword?: boolean;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    validateCallback?: () => boolean;
 }
 
-const Input: React.FC<InputProps> = ({ placeholder, isPassword = false }) => {
-    const [value, setValue] = React.useState<string>('');
+const Input: React.FC<InputProps> = ({ 
+    placeholder, 
+    isPassword = false, 
+    value, 
+    onChange,
+    validateCallback, 
+}) => {
     const [isPasswordVisible, setIsPasswordVisible] = React.useState<boolean>(false);
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
+    const [isValid, setIsValid] = React.useState<boolean>(true);
+
+    const handleValidation = () => {
+        if (!validateCallback) return true;
+        const inputValid = validateCallback();
+        setIsValid(inputValid);
     }
+
     return ( 
+
     <Container>
         <StyledInput 
          value={value}
          placeholder={placeholder} 
          type={isPassword && isPasswordVisible ? 'password' : 'text'} 
-         onChange={handleChange} 
+         onChange={onChange}
+         onBlur={() => handleValidation()}
+         className={isValid ? '' : 'error'}
          />
        { isPassword 
-       && (isPasswordVisible ? <ClosedEyeIcon onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
-       : <OpenedEyeIcon onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
-       )
-       }
+       && (isPasswordVisible ? <OpenedEyeIcon  onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
+       : <ClosedEyeIcon onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
+       )}
      </Container>
      );
 };
