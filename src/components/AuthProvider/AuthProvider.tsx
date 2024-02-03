@@ -6,7 +6,7 @@ type AuthProviderPropsType = {
     children:JSX.Element;
 };
 
-const AuthProvider = ({children}:AuthProviderPropsType ) => {
+const AuthProvider:React.FC<AuthProviderPropsType> = ({children} ) => {
     const [user, setUser] = useState<User | null>(null);
     const login = (user: User) => {
 

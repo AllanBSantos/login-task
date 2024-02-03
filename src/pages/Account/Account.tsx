@@ -1,4 +1,4 @@
-const Account = () => {
+const Account:React.FC = () => {
     return (
         <div>
         <h1>Account</h1>
