@@ -38,5 +38,13 @@ export const FormContainer = styled.div`
   align-items: flex-start;
   justify-content: center;
   padding: 0.5rem;
-  `;
+`;
+
+export const ErrorLabel = styled.p`
+font-size: 1rem;
+font-weight: 500;
+color: #f44336;
+align-self: center;
+margin-bottom: 0.5rem;
+`;
 

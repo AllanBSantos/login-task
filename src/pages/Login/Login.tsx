@@ -3,6 +3,7 @@ import {
     Title,
     Label,
     FormContainer,
+    ErrorLabel,
 } from './Login.style';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -13,6 +14,17 @@ const Login:React.FC = () => {
 
     const [email, setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
+    const [error, setError] = React.useState<string>('');
+
+
+    const handleSubmit = () => {
+        const validate =  validateEmail(email)
+        if(!validate){
+            setError('Email is not valid')
+            return
+        }
+        
+    }
 
     return (
         <Container>
@@ -30,8 +42,9 @@ const Login:React.FC = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}    
                 />
-                <Button onClick={() => {}}>Login</Button>
+                <Button onClick={() => handleSubmit()}>Login</Button>
             </FormContainer>
+           { error &&  <ErrorLabel>{error}</ErrorLabel>}
         </Container>
     );
 };
