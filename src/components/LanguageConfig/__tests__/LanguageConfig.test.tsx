@@ -1,4 +1,4 @@
-describe('Login', () => {
+describe('LanguageConfig', () => {
     test('should return true', () => {
       expect(true).toBe(true);
     });
