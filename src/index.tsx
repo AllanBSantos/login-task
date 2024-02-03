@@ -7,18 +7,22 @@ import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import client from './services/apollo/client';
 import AuthProvider from './components/AuthProvider';
+import { CookiesProvider } from 'react-cookie';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <AuthProvider>
-          <App /> 
-        </AuthProvider>
-      </BrowserRouter>
-    </ApolloProvider>
+    <CookiesProvider>
+      <ApolloProvider client={client}>
+        <BrowserRouter>
+          <AuthProvider>
+            <App /> 
+          </AuthProvider>
+        </BrowserRouter>
+      </ApolloProvider>
+    </CookiesProvider>
   </React.StrictMode>
 );
 reportWebVitals();

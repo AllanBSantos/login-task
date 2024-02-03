@@ -4,6 +4,8 @@ import { User } from "../../types/UserType";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import LoginMutation from "../../graphql/mutations/LoginMutation";
+import { useCookies } from "react-cookie";
+
 
 type AuthProviderPropsType = {
     children:JSX.Element;
@@ -13,22 +15,19 @@ const AuthProvider:React.FC<AuthProviderPropsType> = ({children} ) => {
     const [user, setUser] = useState<User | null>(null);
     const [loginMutation] = useMutation(LoginMutation);
     const navigate = useNavigate(); 
+    const [cookies, setCookie, removeCookie] = useCookies();
 
     useEffect(() => {
-        const token = document.cookie.split('; ').find(row => row.startsWith('token='))
-        if(token){
-            const jwt = token.split('=')[1]
-            if(jwt){
-                setUser({token: jwt})
-            }
-        }
-    }, []);
+         if(cookies['token']) {
+          setUser(cookies['token'])
+         }
+    }, [cookies]);
 
         const login = async ({email, password}: User) => {
             try {
                 const response = await loginMutation({variables: {identifier: email, password}})
                 if( response.data) {
-                    document.cookie = `token=${response.data.jwt}; Secure; SameSite=Strict;`
+                    setCookie('token', response.data.login.jwt, {path: '/', secure: true, sameSite: true} )
                     navigate('/account')
                     setUser(response.data)
                     return {
@@ -47,7 +46,7 @@ const AuthProvider:React.FC<AuthProviderPropsType> = ({children} ) => {
         }
     const logout = () => {
         setUser(null)
-        document.cookie = 'token=; Secure; SameSite=Strict;'
+        removeCookie('token')
         navigate('/login')
     };
 
