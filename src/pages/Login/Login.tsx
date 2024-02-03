@@ -8,51 +8,45 @@ import {
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { validateEmail } from '../../utils/validateEmail';
-import React, { useEffect } from 'react';
-import LoginMutation from '../../graphql/mutations/LoginMutation';
-import { useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+
+import AuthContext from '../../context/AuthContext';
 
 const Login:React.FC = () => {
-
-
-
     const [email, setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
     const [error, setError] = React.useState<string>('');
-    const [login, { data, loading, error: mutationError }] = useMutation(LoginMutation);
-    const navigate = useNavigate();
+    const [loading, setLoading] = React.useState<boolean>(false);
+    const auth = useContext(AuthContext);
 
-    useEffect(() => {
-        if (mutationError){
-            const exception : any = mutationError?.graphQLErrors[0]?.extensions?.exception
-            const errorMessage = exception?.data?.data[0].messages[0].message
-            if(errorMessage){
-                setError(errorMessage)
-            }
+    const validateFields = () => {
+
+        const validEmail =  validateEmail(email)
+        if(!email || !password){
+            setError('Please fill your email and password')
+            return
         }
-        if(data){
-            localStorage.setItem('token', data.login.jwt) //change this to more safe option
-            navigate('/account')
-        }
-       }, [data, mutationError]);
-
-
-    const handleSubmit = async () => {
-        setError('')
-        const validate =  validateEmail(email)
-        if(!validate){
+        if(!validEmail){
             setError('Email is not valid')
             return
         }
-        
-        try {
-            await login({ variables: { identifier: email, password } })
-        } catch (error) {
-            console.error('error', error)
-        }
     }
 
+    const handleSubmit = async () => {
+        setLoading(true)
+        setError('')
+        validateFields()
+        try {
+          const result = await auth.login({email, password})
+            if(result?.error){
+                setError(result.error)
+            }
+        } catch (error) {
+            console.error('error', error)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     return (
         <Container>
@@ -64,7 +58,7 @@ const Login:React.FC = () => {
                 <Label>Your Email</Label>
                 <Input
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => { setError(''); setEmail(e.target.value)}}
                     validateCallback={() => validateEmail(email)}
                 />
                 <Label >Your Password</Label>

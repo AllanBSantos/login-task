@@ -1,5 +1,4 @@
 export type RequestResponseType = {
-    token?: string;
-    status: number;
-    error?: string;
+    data?: any;
+    error?: string | null;
 };
