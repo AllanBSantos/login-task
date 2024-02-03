@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledInput } from './Input.style';
+import { StyledInput, OpenedEyeIcon, ClosedEyeIcon, Container } from './Input.style';
 
 type InputProps = {
     placeholder?: string;
@@ -8,16 +8,24 @@ type InputProps = {
 
 const Input: React.FC<InputProps> = ({ placeholder, isPassword = false }) => {
     const [value, setValue] = React.useState<string>('');
+    const [isPasswordVisible, setIsPasswordVisible] = React.useState<boolean>(false);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
     }
     return ( 
-    <StyledInput 
-     value={value}
-     placeholder={placeholder} 
-     type={isPassword ? 'password' : 'text'} 
-     onChange={handleChange} 
-     />
+    <Container>
+        <StyledInput 
+         value={value}
+         placeholder={placeholder} 
+         type={isPassword && isPasswordVisible ? 'password' : 'text'} 
+         onChange={handleChange} 
+         />
+       { isPassword 
+       && (isPasswordVisible ? <ClosedEyeIcon onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
+       : <OpenedEyeIcon onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
+       )
+       }
+     </Container>
      );
 };
 
