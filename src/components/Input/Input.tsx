@@ -26,12 +26,11 @@ const Input: React.FC<InputProps> = ({
     }
 
     return ( 
-
     <Container>
         <StyledInput 
          value={value}
          placeholder={placeholder} 
-         type={isPassword && isPasswordVisible ? 'password' : 'text'} 
+         type={isPassword && !isPasswordVisible ? 'password' : 'text'} 
          onChange={onChange}
          onBlur={() => handleValidation()}
          className={isValid ? '' : 'error'}

@@ -30,7 +30,7 @@ color: #9b9eb6;
 align-self: flex-start;
 margin-bottom: 0.5rem;
 `;
-export const FormContainer = styled.div`
+export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 85%;

@@ -8,28 +8,59 @@ import {
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { validateEmail } from '../../utils/validateEmail';
-import React from 'react';
+import React, { useEffect } from 'react';
+import LoginMutation from '../../graphql/mutations/LoginMutation';
+import { useMutation } from '@apollo/client';
+import { useNavigate } from 'react-router-dom';
 
 const Login:React.FC = () => {
+
+
 
     const [email, setEmail] = React.useState<string>('');
     const [password, setPassword] = React.useState<string>('');
     const [error, setError] = React.useState<string>('');
+    const [login, { data, loading, error: mutationError }] = useMutation(LoginMutation);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (mutationError){
+            const exception : any = mutationError?.graphQLErrors[0]?.extensions?.exception
+            const errorMessage = exception?.data?.data[0].messages[0].message
+            if(errorMessage){
+                setError(errorMessage)
+            }
+        }
+        if(data){
+            localStorage.setItem('token', data.login.jwt) //change this to more safe option
+            navigate('/account')
+        }
+       }, [data, mutationError]);
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        setError('')
         const validate =  validateEmail(email)
         if(!validate){
             setError('Email is not valid')
             return
         }
         
+        try {
+            await login({ variables: { identifier: email, password } })
+        } catch (error) {
+            console.error('error', error)
+        }
     }
+
 
     return (
         <Container>
             <Title>USER LOGIN</Title>
-            <FormContainer>
+            <FormContainer  onSubmit={e => {
+                e.preventDefault();
+                handleSubmit()
+                }}>
                 <Label>Your Email</Label>
                 <Input
                     value={email}
@@ -42,7 +73,7 @@ const Login:React.FC = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}    
                 />
-                <Button onClick={() => handleSubmit()}>Login</Button>
+                <Button type="submit" loading={loading} >Login</Button>
             </FormContainer>
            { error &&  <ErrorLabel>{error}</ErrorLabel>}
         </Container>
