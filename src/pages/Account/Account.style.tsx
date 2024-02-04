@@ -4,7 +4,7 @@ import Button from '../../components/Button';
 
 export const Card = styled.div`
   background-color: #ffffff;
-  border-radius: 30px;
+  border-radius: 1.8rem;
   box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 
               0px 4px 5px 0px rgba(0,0,0,0.14), 
               0px 1px 10px 0px rgba(0,0,0,0.12); 
@@ -12,6 +12,8 @@ export const Card = styled.div`
   padding: .2rem;
   width: 25rem;
   height: 25rem;
+  max-width: 85%;
+  max-height: 85%;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -29,10 +31,10 @@ export const CoverContainer = styled.div`
   background-color: #f3f3f4;
   width: 100%;
   height: 5rem;
-  border-top-left-radius:  35px;
-  border-top-right-radius: 35px;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-top-left-radius:  2.18rem;
+  border-top-right-radius: 2.18rem;
+  border-bottom-left-radius: .3px;
+  border-bottom-right-radius: .3px;
     `
 
 export const FakeAvatar = styled(Avatar)`

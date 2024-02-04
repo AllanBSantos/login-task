@@ -9,13 +9,15 @@ export const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #f3f3f4;
-  border-radius: 4px;
+  border-radius: .25px;
   box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 
               0px 4px 5px 0px rgba(0,0,0,0.14), 
               0px 1px 10px 0px rgba(0,0,0,0.12); 
-  padding: 16px; 
+  padding: 1rem; 
   width: 32rem; 
   height:32rem; 
+  max-width: 80%;
+  max-height: 80%;
   padding: 1rem;
 `;
 
