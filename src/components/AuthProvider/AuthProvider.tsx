@@ -19,7 +19,7 @@ const AuthProvider:React.FC<AuthProviderPropsType> = ({children} ) => {
 
     useEffect(() => {
          if(cookies['token']) {
-          setUser(cookies['token'])
+          setUser({id: cookies['token'].id, token: cookies['token'].token})
          }
     }, [cookies]);
 
@@ -27,9 +27,9 @@ const AuthProvider:React.FC<AuthProviderPropsType> = ({children} ) => {
             try {
                 const response = await loginMutation({variables: {identifier: email, password}})
                 if( response.data) {
-                    setCookie('token', response.data.login.jwt, {path: '/', secure: true, sameSite: true} )
+                    setCookie('token',{ id: response.data.login.user.id , token: response.data.login.jwt}, {path: '/', secure: true, sameSite: true} )
                     navigate('/account')
-                    setUser(response.data)
+                    setUser({id: response.data.login.user.id, token: response.data.login.jwt})
                     return {
                         data: response.data,
                         error: null
@@ -38,7 +38,7 @@ const AuthProvider:React.FC<AuthProviderPropsType> = ({children} ) => {
              } catch (error : any) {
                 return {
                     data: null,
-                    error: error.graphQLErrors[0]?.extensions?.exception?.data?.data[0].messages[0].message 
+                    error: error?.graphQLErrors[0]?.extensions?.exception?.data?.data[0].messages[0].message 
                     || error.message
                 }
             }

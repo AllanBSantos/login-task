@@ -16,12 +16,14 @@ export const Container = styled.div`
   padding: 16px; 
   width: 32rem; 
   height:32rem; 
+  padding: 1rem;
 `;
 
 export const Title = styled.h2`
 font-size: 2rem;
 font-weight: 500;
 color: #2d21de;
+margin-top: 2rem;
 `;
 export const Label = styled.p`
 font-size: 1rem;
@@ -29,15 +31,15 @@ font-weight: 500;
 color: #9b9eb6;
 align-self: flex-start;
 margin-bottom: 0.5rem;
+margin-top: 1rem;
 `;
 export const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 85%;
-  margin-bottom: 1rem;
   align-items: flex-start;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 2rem;
 `;
 
 export const ErrorLabel = styled.p`

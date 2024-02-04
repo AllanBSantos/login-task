@@ -9,6 +9,9 @@ mutation login($identifier: String!, $password: String!) {
       }
     ){
       jwt
+      user {
+        id
+      }
     }
   }
 `;

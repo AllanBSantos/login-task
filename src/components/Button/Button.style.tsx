@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ReactLoading from 'react-loading';
 export const GradientButton = styled.button`
   width: 100%;
   height: 40px;
@@ -20,5 +19,3 @@ export const GradientButton = styled.button`
     background: linear-gradient(to right, #2d21de, #1e16b8);
   }
 `;
-
-export const LoadingIcon = styled(ReactLoading)``;

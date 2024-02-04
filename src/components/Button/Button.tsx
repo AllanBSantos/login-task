@@ -1,5 +1,6 @@
 import React from 'react';
-import { GradientButton, LoadingIcon } from './Button.style'; 
+import { GradientButton } from './Button.style'; 
+import ReactLoading from 'react-loading';
 
 type ButtonProps = {
     children: React.ReactNode;
@@ -10,9 +11,14 @@ type ButtonProps = {
 
 const Button:React.FC<ButtonProps> = ({ children, type, loading, onClick }) => {
   return (
-    <GradientButton onClick={onClick} type={type} disabled={loading}  >
+    <GradientButton 
+      onClick={onClick} 
+      type={type} 
+      disabled={loading}  
+     
+    >
       { loading 
-        ? <LoadingIcon type="spin" height={25} width={25} /> 
+        ? <ReactLoading type='spin' height={25} width={25} /> 
         : children}
     </GradientButton>
   );
