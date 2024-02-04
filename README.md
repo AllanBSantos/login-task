@@ -26,7 +26,7 @@ To use **Login-Task**, follow these steps:
     ```
 
 4. 1. Unit tests can be run with   
- ```
+    ```
     yarn test
     ``` 
 
@@ -57,4 +57,4 @@ While **Login-Task**
 1. **Error Handling**: Enhance error handling throughout the application. Provide meaningful error messages to users.
 2. **Additional Tests**: Besides unit tests, consider adding integration tests and end-to-end tests.
 3. **Coverage Reporting**: Configure code coverage reporting to track test coverage.
-4. **HTTPOnly Tokens**: Implement token storage on the server using HTTPOnly cookies for better security.
+4. **HTTPOnly Tokens**: Implement token storage on the server using HTTPOnly cookies for better security
