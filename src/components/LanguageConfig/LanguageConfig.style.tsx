@@ -5,12 +5,12 @@ import { DE } from 'country-flag-icons/react/3x2'
 
 export const Container = styled.div`
   display: flex;
-  width: 100%;
+  width: 200px;
+  height: 50px;
   flex-direction: row;
   position: absolute;
   left: 0;
   bottom: 0;
-  right: 0;
 `;
 export const EnglishIcon = styled(GB)`
 width: 35px;
@@ -40,5 +40,10 @@ margin: 6px;
   cursor: pointer;
   width: 38px;
   height: 38px;
-  }
+  }`
+
+export const FlagContainer = styled.div`
+height: 50px;
+width: 50px;
 `;
+
