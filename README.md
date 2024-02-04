@@ -2,6 +2,10 @@
 
 **Login-Task** is a project that simulate a login service. Below, I'll outline how to set up the project, explain its folder structure, and suggest improvements.
 
+## Live Demo
+
+The project is deployed on Vercel and can be accessed at the following URL: https://login-task-flax.vercel.app/
+
 ## Getting Started
 
 To use **Login-Task**, follow these steps:
