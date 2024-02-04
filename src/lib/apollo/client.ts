@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: "https://cms.trial-task.k8s.ext.fcse.io/graphql"
+    uri: process.env.REACT_APP_API_URL
   });
 
   export default client;
