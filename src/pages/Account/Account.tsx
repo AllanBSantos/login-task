@@ -15,6 +15,7 @@ import ReactLoading from 'react-loading';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import getUserQuery from '../../graphql/queries/getUserQuery';
+import { useTranslation } from 'react-i18next';
 
 const Account:React.FC = () => {
 
@@ -28,6 +29,7 @@ const Account:React.FC = () => {
             }
           }
     });
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!auth.user) {
@@ -56,16 +58,16 @@ const Account:React.FC = () => {
                 />
                 <LabelContainer>
                     <LabelRow>
-                        <Label>FirstName: </Label>
+                        <Label>{t('First name:')}</Label>
                         <Label>{firstName}</Label>
                     </LabelRow>
                     <LabelRow>
-                        <Label>LastName: </Label>
+                        <Label>{t('Last name:')}</Label>
                         <Label>{lastName}</Label>
                     </LabelRow>
                 </LabelContainer>
                 <Footer>
-                    <LogoutButton onClick={handleLogout} >Logout</LogoutButton>
+                    <LogoutButton onClick={handleLogout} >{t('Logout')}</LogoutButton>
                 </Footer>       
             </Container>}
         </Card>

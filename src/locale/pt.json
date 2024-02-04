@@ -1,0 +1,15 @@
+{
+    "translation":{
+        "Please fill your email and password":"Por favor, preencha seu e-mail e senha",
+        "Email is not valid":"Email não é válido",
+        "USER LOGIN":"LOGIN DE USUÁRIO",
+        "Your Email":"Seu E-mail",
+        "Your Password":"Sua Senha",
+        "Login":"Entrar",
+        "Identifier or password invalid.":"Email ou senha inválidos.",
+        "First name:":"Nome:",
+        "Last name:":"Sobrenome:",
+        "Logout":"Sair",
+        "Page not found":"Página não encontrada"
+    }
+}

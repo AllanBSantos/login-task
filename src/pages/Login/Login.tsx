@@ -11,6 +11,7 @@ import { validateEmail } from '../../utils/validateEmail';
 import React, { useContext } from 'react';
 
 import AuthContext from '../../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 const Login:React.FC = () => {
     const [email, setEmail] = React.useState<string>('');
@@ -18,15 +19,16 @@ const Login:React.FC = () => {
     const [error, setError] = React.useState<string>('');
     const [loading, setLoading] = React.useState<boolean>(false);
     const auth = useContext(AuthContext);
+    const { t } = useTranslation();
 
     const validateFields = () => {
         const validEmail =  validateEmail(email)
         if(!email || !password){
-            setError('Please fill your email and password')
+            setError(t('Please fill your email and password'))
             return false
         }
         if(!validEmail){
-            setError('Email is not valid')
+            setError(t('Email is not valid'))
             return false
         }
         return true
@@ -39,7 +41,7 @@ const Login:React.FC = () => {
         try {
           const result = await auth.login({email, password})
             if(result?.error){
-                setError(result.error)
+                setError(t(`${result.error}`))
             }
         } catch (error) {
             console.error('error', error)
@@ -50,24 +52,24 @@ const Login:React.FC = () => {
 
     return (
         <Container>
-            <Title>USER LOGIN</Title>
+            <Title>{t('USER LOGIN')}</Title>
             <FormContainer  onSubmit={e => {
                 e.preventDefault();
                 handleSubmit()
                 }}>
-                <Label>Your Email</Label>
+                <Label>{t('Your Email')}</Label>
                 <Input
                     value={email}
                     onChange={(e) => { setError(''); setEmail(e.target.value)}}
                     validateCallback={() => validateEmail(email)}
                 />
-                <Label >Your Password</Label>
+                <Label>{t('Your Password')}</Label>
                 <Input
                     isPassword= {true}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}    
                 />
-                <Button type="submit" loading={loading} >Login</Button>
+                <Button type="submit" loading={loading} >{t('Login')}</Button>
             </FormContainer>
            { error &&  <ErrorLabel>{error}</ErrorLabel>}
         </Container>
