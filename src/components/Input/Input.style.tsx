@@ -13,6 +13,7 @@ export const Container = styled.div`
 
 export const StyledInput = styled.input`
   width: 100%;
+  height: 40px;
   padding: 10px;
   display: inline-block;
   border: 1px solid #ccc;
