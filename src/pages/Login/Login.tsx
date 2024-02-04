@@ -20,22 +20,22 @@ const Login:React.FC = () => {
     const auth = useContext(AuthContext);
 
     const validateFields = () => {
-
         const validEmail =  validateEmail(email)
         if(!email || !password){
             setError('Please fill your email and password')
-            return
+            return false
         }
         if(!validEmail){
             setError('Email is not valid')
-            return
+            return false
         }
+        return true
     }
 
     const handleSubmit = async () => {
-        setLoading(true)
         setError('')
-        validateFields()
+       if(!validateFields() ) return 
+       setLoading(true)
         try {
           const result = await auth.login({email, password})
             if(result?.error){
