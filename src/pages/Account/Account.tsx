@@ -48,7 +48,7 @@ const Account:React.FC = () => {
     return (
         <Card>
             {
-            loading ? <ReactLoading color='#2d21de' type='spin' height={40} width={40} /> :    
+            loading ? <ReactLoading data-testid="account-loading" color='#2d21de' type='spin' height={40} width={40} /> :    
             <Container>
               <CoverContainer/>
                 <FakeAvatar

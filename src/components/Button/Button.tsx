@@ -18,7 +18,7 @@ const Button:React.FC<ButtonProps> = ({ children, type, loading, onClick }) => {
      
     >
       { loading 
-        ? <ReactLoading type='spin' height={25} width={25} /> 
+        ? <ReactLoading data-testid="loading-indicator" type='spin' height={25} width={25} /> 
         : children}
     </GradientButton>
   );

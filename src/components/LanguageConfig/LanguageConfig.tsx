@@ -12,13 +12,13 @@ const LanguageConfig:React.FC = () => {
   return (
     <Container>
       <FlagContainer onClick={() => handleChangeLanguage('en')} >
-        <EnglishIcon/>
+        <EnglishIcon data-testid="english-icon" />
       </FlagContainer>
       <FlagContainer onClick={() => handleChangeLanguage('de')}>
-        <GermanIcon/>
+        <GermanIcon data-testid="german-icon" />
       </FlagContainer>
       <FlagContainer onClick={() => handleChangeLanguage('pt')}>
-        <PortugueseBRIcon/>
+        <PortugueseBRIcon data-testid="portuguese-icon"/>
       </FlagContainer>
     </Container>
   );

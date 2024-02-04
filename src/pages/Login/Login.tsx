@@ -59,12 +59,14 @@ const Login:React.FC = () => {
                 }}>
                 <Label>{t('Your Email')}</Label>
                 <Input
+                    dataTestId="email-input"
                     value={email}
                     onChange={(e) => { setError(''); setEmail(e.target.value)}}
                     validateCallback={() => validateEmail(email)}
                 />
                 <Label>{t('Your Password')}</Label>
                 <Input
+                    dataTestId="password-input"
                     isPassword= {true}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}    

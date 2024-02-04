@@ -5,6 +5,7 @@ type InputProps = {
     value?: string;
     placeholder?: string;
     isPassword?: boolean;
+    dataTestId?: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     validateCallback?: () => boolean;
 }
@@ -13,6 +14,7 @@ const Input: React.FC<InputProps> = ({
     placeholder, 
     isPassword = false, 
     value, 
+    dataTestId,
     onChange,
     validateCallback, 
 }) => {
@@ -28,6 +30,7 @@ const Input: React.FC<InputProps> = ({
     return ( 
     <Container>
         <StyledInput 
+         data-testid={dataTestId}
          value={value}
          placeholder={placeholder} 
          type={isPassword && !isPasswordVisible ? 'password' : 'text'} 
@@ -36,8 +39,8 @@ const Input: React.FC<InputProps> = ({
          className={isValid ? '' : 'error'}
          />
        { isPassword 
-       && (isPasswordVisible ? <OpenedEyeIcon  onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
-       : <ClosedEyeIcon onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
+       && (isPasswordVisible ? <OpenedEyeIcon role="button"  onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
+       : <ClosedEyeIcon role="button" onClick={()=>setIsPasswordVisible(!isPasswordVisible)} />
        )}
      </Container>
      );
